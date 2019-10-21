@@ -1,0 +1,98 @@
+:root{
+    --text-color : #fff;
+    --background-color : #000;
+    --default-font-family: 'Cinzel', serif;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--default-font-family);
+    background: var(--background-color);
+}
+
+main{
+    /* background: var(--background-color); */
+    color: var(--text-color);
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+   }
+
+   header{
+       padding: 20px;
+       width: 100%;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-between;
+       align-items: center;
+   }
+
+   img{
+       width: 50px;
+       height: 50px;
+       border-radius: 50%;
+
+   }
+
+  .logout-btn{
+       background: transparent;
+       color: var(--text-color);
+       border: none;
+       font-size: 1.5em;
+   }
+
+   .fa-sign-out-alt{
+       color: #fff;
+   }
+
+   footer{
+       text-align: center;
+       width: 100%;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-around;
+       align-items: center;
+   }
+
+   footer a{
+       text-decoration: none;
+       color: var(--text-color);
+   }
+
+   /* ----------------------------------------- */
+
+   .add-budget{
+       background: transparent;
+       border: none;
+       bottom: 50px;
+       right: 50px;
+       position: absolute;
+    }
+
+   .fa-plus-circle{
+       color: #fff;
+       font-size: 5em;
+       
+   }
+
+   
+   .info-budget{
+    background: transparent;
+    border: none;
+    bottom: 150px;
+    right: 50px;
+    position: absolute;
+ }
+
+.fa-info-circle{
+    color: #fff;
+    font-size: 5em;
+    
+}
