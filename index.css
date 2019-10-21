@@ -1,0 +1,58 @@
+:root{
+    --text-color : #fff;
+    --background-color : #000;
+    --default-font-family: 'Cinzel', serif;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--default-font-family);
+    background: var(--background-color);
+}
+
+main{
+    /* background: var(--background-color); */
+    color: var(--text-color);
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+   }
+
+   header{
+       padding: 20px;
+   }
+
+  .login-btn{
+       background: transparent;
+       color: var(--text-color);
+       width: 100px;
+       height: 100px;
+       border-radius: 50%;
+       border: 1px solid #fff;
+       font-size: 1.5em;
+   }
+
+   .fa-google{
+       color: #f00;
+   }
+
+   footer{
+       text-align: center;
+       width: 100%;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-around;
+       align-items: center;
+   }
+
+   footer a{
+       text-decoration: none;
+       color: var(--text-color);
+   }
