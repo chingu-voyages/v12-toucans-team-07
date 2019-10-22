@@ -61,7 +61,7 @@ main{
        align-items: center;
    }
 
-   footer a{
+   footer > a{
        text-decoration: none;
        color: var(--text-color);
    }
@@ -89,10 +89,87 @@ main{
     bottom: 150px;
     right: 50px;
     position: absolute;
- }
+   }
 
 .fa-info-circle{
     color: #fff;
     font-size: 5em;
-    
+}
+
+/* ----------------------------------------- */
+
+.info-box{
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height:auto;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+     align-items: center;
+    visibility: hidden;
+}
+
+.info-box > h2, .info-box > p{
+    background: transparent;
+    width: 100%;
+    margin: 20px;
+}
+
+
+.info-box > button{
+    margin-top: 20px;
+    background: transparent;
+    border: none;
+    align-self: flex-end;
+}
+
+
+hr{
+    width: 100%;
+}
+/* --------------------------------------------- */
+
+.add-budget-box{
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height:auto;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: hidden;
+}
+
+.add-budget-box h2, div{
+    background: transparent;
+    width: 100%;
+    margin: 20px;
+}
+
+.budget-fields {
+    background: transparent;
+    width: 100%;
+    font-size: 1em;
+}
+
+#budget-submit{
+    border: none;
+    font-size: 1.2em;
+}
+
+.close-budget{
+    margin-top: 20px;
+    background: transparent;
+    border: none;
+    align-self: flex-end;
 }

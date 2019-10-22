@@ -24,11 +24,35 @@
         <footer>
             <a href="kaushikdev.github.io/portfolio" target="_blank">Developer Portfolio</a>
             <p>2019 &copy; Piyush Kaushik. All rights reserved.</p>
-            <!-- <a href="https://chingu.io/" target="_blank">Made for Chingu's Voyage-12</a> -->
         </footer>
     </main>
-    <button class="info-budget"><i class="fas fa-info-circle"></i></button>
-    <button class="add-budget"><i class="fas fa-plus-circle"></i></button>
+    <!-- Always Display Buttons -->
+    <button class="info-budget" onclick="informationBoxToggle()"><i class="fas fa-info-circle"></i></button>
+    
+    <button class="add-budget" onclick="budgetBoxToggle()"><i class="fas fa-plus-circle"></i></button>
+    <!-- Info Box HTML -->
+    <div class="info-box">
+        <h2>How To Use Budget Manager</h2>
+        <hr>
+        <p>Step1 : Click on + icon at bottom right. <br>Step2: Add your budget. <br>Step3: Add your expense.<br>Step4: View Budget Status.</p>
+        <button class="close-info" onclick="closeInformationBox()">Close X</button>
+    </div>
+    <!-- Add Budget Input Box -->
+    <div class="add-budget-box">
+        <h2>Please Enter Details of Budget</h2>
+        <hr>
+        <div>
+         
+            <input class="budget-fields" id="budget-name" type="text" required maxlength="20" placeholder="Name Your Budget">
+        </div>
+        <div>
+            
+            <input class="budget-fields" id="budget-value" type="number" required min="100" max="1000000" maxlength="20" placeholder="Budget Value">
+        </div>
+        <button class="budget-fields" type="submit" id="budget-submit">Save</button>
+
+        <button class="close-budget" onclick="closeBudgetBox()">Close X</button>
+    </div>
 </body>
 <script src="main.js"></script>
 
