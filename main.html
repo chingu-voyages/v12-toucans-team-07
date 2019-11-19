@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Budget Manager</title>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-database.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <script src="https://kit.fontawesome.com/16b76cc9d0.js" crossorigin="anonymous"></script>
@@ -14,15 +17,20 @@
 <body>
     <main>
         <header>
-            <img src="piyushBW.jpg" alt="">
-            <h1>Budget Manager</h1>
-            <button class="logout-btn">sign-out <i class="fas fa-sign-out-alt"></i></button>
+            <img class="user-image" src="" alt="user-display-picture">
+            <h1 class="user-name"></h1>
+            <button class="logout-btn" onclick="signout()">sign-out <i class="fas fa-sign-out-alt"></i></button>
         </header>
         <section>
+            <div class="budgets-display-section">
 
+            </div>
+            <div class="expenses-display-section">
+           
+            </div>
         </section>
         <footer>
-            <a href="kaushikdev.github.io/portfolio" target="_blank">Developer Portfolio</a>
+            <a href="https://kaushikdev.github.io/portfolio" target="_blank">Developer Portfolio</a>
             <p>2019 &copy; Piyush Kaushik. All rights reserved.</p>
         </footer>
     </main>
@@ -39,7 +47,7 @@
     </div>
     <!-- Add Budget Input Box -->
     <div class="add-budget-box">
-        <h2>Please Enter Details of Budget</h2>
+        <h2>Enter New Budget Details</h2>
         <hr>
         <div>
          
@@ -47,11 +55,10 @@
         </div>
         <div>
             
-            <input class="budget-fields" id="budget-value" type="number" required min="100" max="1000000" maxlength="20" placeholder="Budget Value">
+            <input class="budget-fields" id="budget-value" type="number" required min="100" max="1000000" maxlength="10" placeholder="Budget Value">
         </div>
-        <button class="budget-fields" type="submit" id="budget-submit">Save</button>
-
-        <button class="close-budget" onclick="closeBudgetBox()">Close X</button>
+        <button class="budget-fields" type="submit" id="budget-submit" onclick="saveBudgetDetails()">Save</button>
+        <button class="close-budget" onclick="closeBudgetBox()" id="budget-cancel">Cancel</button>
     </div>
 </body>
 <script src="main.js"></script>
