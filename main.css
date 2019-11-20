@@ -69,27 +69,42 @@ main{
 }
 
    .budgets-display-section{
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.95);
+    color: #000;
     border-radius: 10px;
     height: 100%;
     width: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    overflow-y: scroll hidden;
+    overflow-y: scroll;
    }
 
+   .budget-card, .expense-card{
+    background: rgba(0,0,0,0.9);
+    color: #fff;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    height: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
    .expenses-display-section{
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.95);
     border-radius: 10px;
     height: 100%;
     width: 60%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    overflow-y: scroll hidden;
+    overflow-y: scroll;
    }
   /* ----------------------------------------- */
    footer{
@@ -118,7 +133,7 @@ main{
 
    .fa-plus-circle{
     background: transparent;
-       color: #fff;
+       color: #999;
        font-size: 3em;
        
    }
@@ -134,7 +149,7 @@ main{
 
 .fa-info-circle{
     background: transparent;
-    color: #fff;
+    color: #999;
     font-size: 3em;
 }
 
@@ -176,7 +191,7 @@ hr{
 }
 /* --------------------------------------------- */
 
-.add-budget-box{
+.add-budget-box, .add-expense-box{
     background: #fff;
     position: absolute;
     left: 50%;
@@ -198,18 +213,24 @@ hr{
     margin: 20px;
 }
 
-.budget-fields {
+.add-expense-box h2, div{
+    background: transparent;
+    width: 100%;
+    margin: 20px;
+}
+
+.budget-fields, .expense-fields {
     background: transparent;
     width: 100%;
     font-size: 1em;
 }
 
-#budget-submit{
+#budget-submit, #expense-submit{
     border: none;
     font-size: 1.2em;
 }
 
-.close-budget{
+.close-budget, .close-expense{
     margin-top: 20px;
     background: transparent;
     border: none;

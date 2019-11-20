@@ -9,6 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-database.js"></script>
+    <script src="jquery-3.2.1.min.js"></script> 
     <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
     <link rel="stylesheet" href="main.css">
     <script src="https://kit.fontawesome.com/16b76cc9d0.js" crossorigin="anonymous"></script>
@@ -23,10 +24,10 @@
         </header>
         <section>
             <div class="budgets-display-section">
-
+                This Section displays all your Budgets.
             </div>
             <div class="expenses-display-section">
-           
+           Select a budget to view its expenses
             </div>
         </section>
         <footer>
@@ -59,6 +60,21 @@
         </div>
         <button class="budget-fields" type="submit" id="budget-submit" onclick="saveBudgetDetails()">Save</button>
         <button class="close-budget" onclick="closeBudgetBox()" id="budget-cancel">Cancel</button>
+    </div>
+       <!-- Add Expense Input Box -->
+       <div class="add-expense-box">
+        <h2>Enter New Expense Details</h2>
+        <hr>
+        <div>
+         
+            <input class="expense-fields" id="expense-name" type="text" required maxlength="20" placeholder="Name Your Expense">
+        </div>
+        <div>
+            
+            <input class="expense-fields" id="expense-value" type="number" required min="100" max="1000000" maxlength="10" placeholder="Expense Value">
+        </div>
+        <button class="expense-fields" type="submit" id="expense-submit" onclick="saveExpenseDetails()">Save</button>
+        <button class="close-expense" onclick="closeExpenseBox()" id="expense-cancel">Cancel</button>
     </div>
 </body>
 <script src="main.js"></script>
