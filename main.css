@@ -81,6 +81,15 @@ main{
     overflow-y: scroll;
    }
 
+   .budget-details{
+    width: 90%;
+    border-radius: 10px;
+   }
+
+   .card-fields{
+       background: transparent;
+      
+   }
    .budget-card, .expense-card{
     background: rgba(0,0,0,0.9);
     color: #fff;
@@ -94,6 +103,8 @@ main{
     justify-content: center;
     align-items: center;
 }
+
+
 
    .expenses-display-section{
     background: rgba(255,255,255,0.95);

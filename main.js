@@ -112,42 +112,59 @@ function closeExpenseBox() {
 function storeExpense(clickedID) {
 //  console.log("The clicked add new expense button's id is : " + clickedID);
   expenseID = clickedID;
+
+  clearExpensesSection();
 }
 
 function viewExpense(clickedID, budgetName, budgetValue) {
   console.log("The clicked view expense button's id is : " + clickedID);
   viewExpenseID = clickedID;
+  let totalExpenses = 0;
 
-
-  $(".expenses-display-section").append("<div class='budget-details'><h2>Budget Name :"+budgetName+"</h2><h2>Budget Value : "+budgetValue+"</div>");
+  $(".expenses-display-section").append("<div class='budget-details'><h2 class='card-fields'>Budget Name : "+budgetName+"</h2 class='card-fields'><h2 class='card-fields'>Budget Value : <i class='fas fa-rupee-sign card-fields'></i> "+budgetValue+"</h2></div>");
 
   expenseRetrieveRef = DATABASE_REF.child(
     "BudgetManager/users/" + uid + "/Budgets/" + viewExpenseID + "/Expenses"
   );
-
+  $(".expenses-display-section").append("<p>Expenditure History</p>");
   expenseRetrieveRef.on("child_added", snapshotExpenses => {
     retrievedExpenseData = snapshotExpenses.val();
     retrievedExpenseKey = snapshotExpenses.key;
-
     
+    
+   //totalExpenses +=   Number(retrievedExpenseData.ExpenseValue);
+   totalExpenses +=   parseInt(retrievedExpenseData.ExpenseValue);
+
    
-
-
     $(".expenses-display-section").append(
-        "<div class='expense-card'><h3>" +
+        "<div class='expense-card'><h3 class='card-fields'>" +
           retrievedExpenseData.ExpenseName +
-          "</h3><h5>Expense Value : " +
+          "</h3><h5 class='card-fields'>You Spent : <i class='fas fa-rupee-sign'></i> " +
           retrievedExpenseData.ExpenseValue +
-          "</h5><h5>Created On : " +
+          "</h5><h5 class='card-fields'>On Date : " +
           retrievedExpenseData.ExpenseTimestamp +
           "</h5></div>"
       );
   });
+  
+  
 
+   let balance =  budgetValue - totalExpenses;
+   $(".budget-details").append("<h2 class='card-fields'>Total Expenses : <i class='fas fa-rupee-sign card-fields'></i> "+totalExpenses+"</h2><h2 class='card-fields'>Balance : <i class='fas fa-rupee-sign card-fields'></i> "+balance+"</h2>");
+   if(balance >= budgetValue/2){
+    $(".budget-details").css("background-color", "green");
+   }
+   else if(balance <= budgetValue/2 && balance > 0){
+    $(".budget-details").css({'background-color' :  'yellow', 'color' : '#000'});
+   }
+   else if(balance <=0) {
+    $(".budget-details").css("background-color", "red");
+   }
 }
 
 
 function clearExpensesSection(){
+ 
     $(".expenses-display-section").empty();
 }
 
@@ -190,40 +207,22 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
       retrievedBudgetData = snapshotBudget.val();
       retrievedBudgetKey = snapshotBudget.key;
 
+      
       $(".budgets-display-section").append(
-        "<div class='budget-card'><h3>" +
+        "<div class='budget-card'><h3 class='card-fields'>" +
           retrievedBudgetData.BudgetName +
-          "</h3><h5>Budget Value : " +
+          "</h3><h5 class='card-fields'>Budget Value : <i class='fas fa-rupee-sign card-fields'></i> " +
           retrievedBudgetData.BudgetValue +
-          "</h5><h5>Created On : " +
+          "</h5><h5 class='card-fields'>Created On : " +
           retrievedBudgetData.BudgetTimestamp +
-          "</h5><button id=" +
+          "</h5><button class='card-fields' id=" +
           retrievedBudgetKey +
           " onClick='clearExpensesSection();viewExpense(this.id,\""+retrievedBudgetData.BudgetName+"\","+retrievedBudgetData.BudgetValue+")'>View Expense History</button><button id=" +
           retrievedBudgetKey +
-          " class='add-expense' onclick='expenseBoxToggle();storeExpense(this.id)'><i class='fas fa-plus-circle'></i></button></div>"
+          " class='add-expense card-fields' onclick='clearExpensesSection();expenseBoxToggle();storeExpense(this.id)'><i class='fas fa-plus-circle'></i></button></div>"
       );
 
-      //+++++++++testing expenses under a particular budget+++++++++++++++++
-    //   expensesData = snapshotBudget.child("Expenses");
-    //   if (expensesData.exists()) {
-    //     expensesData.forEach(function(snapshotExpense) {
-    //       retrievedExpensekey = snapshotExpense.key;
-    //       retrievedExpenseData = snapshotExpense.val();
-
-    //       $(".expenses-display-section").append(
-    //         "<div class='budget-card'><h3>" +
-    //           retrievedExpenseData.ExpenseName +
-    //           "</h3><h5>Budget Value : " +
-    //           retrievedExpenseData.ExpenseValue +
-    //           "</h5><h5>Created On : " +
-    //           retrievedExpenseData.ExpenseTimestamp +
-    //           "</h5></div>"
-    //       );
-    //     });
-    //   }
-      //+++++++testing ends for expenses under a particular budget++++++++++++++++
-    });
+   });
   } else {
     console.log("Firebase User is not logged in");
   }
