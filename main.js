@@ -31,7 +31,9 @@ let userName;
 let userImageUrl;
 let uid;
 let expenseId;
-let viewExpenseID;
+let budgetID;
+let budgetName;
+let budgetValue;
 
 function signout() {
   firebase
@@ -110,30 +112,28 @@ function closeExpenseBox() {
 }
 
 function storeExpense(clickedID) {
-//  console.log("The clicked add new expense button's id is : " + clickedID);
-  expenseID = clickedID;
-
+  budgetID = clickedID;
   clearExpensesSection();
+ 
 }
 
 function viewExpense(clickedID, budgetName, budgetValue) {
   console.log("The clicked view expense button's id is : " + clickedID);
-  viewExpenseID = clickedID;
+  budgetID = clickedID;
   let totalExpenses = 0;
 
   $(".expenses-display-section").append("<div class='budget-details'><h2 class='card-fields'>Budget Name : "+budgetName+"</h2 class='card-fields'><h2 class='card-fields'>Budget Value : <i class='fas fa-rupee-sign card-fields'></i> "+budgetValue+"</h2></div>");
 
   expenseRetrieveRef = DATABASE_REF.child(
-    "BudgetManager/users/" + uid + "/Budgets/" + viewExpenseID + "/Expenses"
+    "BudgetManager/users/" + uid + "/Budgets/" + budgetID + "/Expenses"
   );
-  $(".expenses-display-section").append("<p>Expenditure History</p>");
+  $(".expenses-display-section").append("<p style='color:white;'>Expenditure History</p>");
   expenseRetrieveRef.on("child_added", snapshotExpenses => {
     retrievedExpenseData = snapshotExpenses.val();
     retrievedExpenseKey = snapshotExpenses.key;
     
     
-   //totalExpenses +=   Number(retrievedExpenseData.ExpenseValue);
-   totalExpenses +=   parseInt(retrievedExpenseData.ExpenseValue);
+    totalExpenses +=   parseInt(retrievedExpenseData.ExpenseValue);
 
    
     $(".expenses-display-section").append(
@@ -143,7 +143,9 @@ function viewExpense(clickedID, budgetName, budgetValue) {
           retrievedExpenseData.ExpenseValue +
           "</h5><h5 class='card-fields'>On Date : " +
           retrievedExpenseData.ExpenseTimestamp +
-          "</h5></div>"
+          "</h5><div class='expense-card-buttons-div'><button class='expense-card-buttons' id=" +
+          retrievedExpenseKey +
+          " onClick='deleteExpense(this.id,\""+budgetID+"\",\""+budgetName+"\","+budgetValue+")'><i class='far fa-trash-alt'></i></button></div>"
       );
   });
   
@@ -163,12 +165,31 @@ function viewExpense(clickedID, budgetName, budgetValue) {
 }
 
 
+function deleteExpense(expenseID, budgetID, budgetName, budgetValue){
+  console.log("budgetID is : " + budgetID + " and ExpenseID is : " + expenseID);
+  expenseToBeDeletedRef = DATABASE_REF.child(
+    "BudgetManager/users/" + uid + "/Budgets/" + budgetID + "/Expenses/" + expenseID  
+  );
+
+  expenseToBeDeletedRef.remove();
+  clearExpensesSection();
+  viewExpense(budgetID, budgetName, budgetValue);
+}
+
 function clearExpensesSection(){
  
     $(".expenses-display-section").empty();
+    $(".expenses-display-section").append("Click on 'eye' icon under a budget to view its expenses.");
+}
+
+function clearBudgetsSection(){
+ 
+  $(".budgets-display-section").empty();
+  $(".budgets-display-section").append("This Section displays all your Budgets.");
 }
 
 function saveExpenseDetails() {
+  clearExpensesSection();
   let expenseAddDate = new Date();
   let expenseTimeStamp = expenseAddDate.toLocaleString();
 
@@ -178,7 +199,7 @@ function saveExpenseDetails() {
     alert("Please mention 'Expense Value'");
   } else {
     expenseStoreRef = DATABASE_REF.child(
-      "BudgetManager/users/" + uid + "/Budgets/" + expenseID + "/Expenses"
+      "BudgetManager/users/" + uid + "/Budgets/" + budgetID + "/Expenses"
     );
     expenseStoreRef.push({
       ExpenseName: EXPENSE_NAME.value,
@@ -187,7 +208,53 @@ function saveExpenseDetails() {
     });
     closeExpenseBox();
   }
+
+  clearExpensesSection();
 }
+
+
+function deleteBudget(budgetID){
+  console.log("budgetID is : " + budgetID);
+  budgetToBeDeletedRef = DATABASE_REF.child(
+    "BudgetManager/users/" + uid + "/Budgets/" + budgetID  
+  );
+
+  budgetToBeDeletedRef.remove();
+  clearExpensesSection();
+  clearBudgetsSection();
+  retrieveBudgets();
+}
+
+
+function retrieveBudgets(){
+  //Retrieving Budget Info
+  budgetRetrieveRef = DATABASE_REF.child(
+    "BudgetManager/users/" + uid + "/Budgets"
+  );
+  budgetRetrieveRef.on("child_added", snapshotBudget => {
+    retrievedBudgetData = snapshotBudget.val();
+    retrievedBudgetKey = snapshotBudget.key;
+
+    
+    $(".budgets-display-section").append(
+      "<div class='budget-card'><h3 class='card-fields'>" +
+        retrievedBudgetData.BudgetName +
+        "</h3><h5 class='card-fields'>Budget Value : <i class='fas fa-rupee-sign card-fields'></i> " +
+        retrievedBudgetData.BudgetValue +
+        "</h5><h5 class='card-fields'>Created On : " +
+        retrievedBudgetData.BudgetTimestamp +
+        "</h5><div class='budget-card-buttons-div'><button class='expense-card-buttons' id=" +
+        retrievedBudgetKey +
+        " onClick='deleteBudget(this.id)'><i class='far fa-trash-alt'></i></button><button class='budget-card-buttons' id=" +
+        retrievedBudgetKey +
+        " onClick='clearExpensesSection();viewExpense(this.id,\""+retrievedBudgetData.BudgetName+"\","+retrievedBudgetData.BudgetValue+")'><i class='fas fa-eye'></i></button><button id=" +
+        retrievedBudgetKey +
+        " class='add-expense budget-card-buttons' onclick='clearExpensesSection();expenseBoxToggle();storeExpense(this.id,\""+retrievedBudgetData.BudgetName+"\","+retrievedBudgetData.BudgetValue+")'><i class='fas fa-plus-circle'></i></button></div></div>"
+    );
+
+ });
+}
+
 
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
@@ -199,30 +266,34 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     USER_IMAGE.src = userImageUrl;
     USER_NAME.innerHTML = "Welcome, " + userName;
 
+
+    retrieveBudgets();
     //Retrieving Budget Info
-    budgetRetrieveRef = DATABASE_REF.child(
-      "BudgetManager/users/" + uid + "/Budgets"
-    );
-    budgetRetrieveRef.on("child_added", snapshotBudget => {
-      retrievedBudgetData = snapshotBudget.val();
-      retrievedBudgetKey = snapshotBudget.key;
+  //   budgetRetrieveRef = DATABASE_REF.child(
+  //     "BudgetManager/users/" + uid + "/Budgets"
+  //   );
+  //   budgetRetrieveRef.on("child_added", snapshotBudget => {
+  //     retrievedBudgetData = snapshotBudget.val();
+  //     retrievedBudgetKey = snapshotBudget.key;
 
       
-      $(".budgets-display-section").append(
-        "<div class='budget-card'><h3 class='card-fields'>" +
-          retrievedBudgetData.BudgetName +
-          "</h3><h5 class='card-fields'>Budget Value : <i class='fas fa-rupee-sign card-fields'></i> " +
-          retrievedBudgetData.BudgetValue +
-          "</h5><h5 class='card-fields'>Created On : " +
-          retrievedBudgetData.BudgetTimestamp +
-          "</h5><button class='card-fields' id=" +
-          retrievedBudgetKey +
-          " onClick='clearExpensesSection();viewExpense(this.id,\""+retrievedBudgetData.BudgetName+"\","+retrievedBudgetData.BudgetValue+")'>View Expense History</button><button id=" +
-          retrievedBudgetKey +
-          " class='add-expense card-fields' onclick='clearExpensesSection();expenseBoxToggle();storeExpense(this.id)'><i class='fas fa-plus-circle'></i></button></div>"
-      );
+  //     $(".budgets-display-section").append(
+  //       "<div class='budget-card'><h3 class='card-fields'>" +
+  //         retrievedBudgetData.BudgetName +
+  //         "</h3><h5 class='card-fields'>Budget Value : <i class='fas fa-rupee-sign card-fields'></i> " +
+  //         retrievedBudgetData.BudgetValue +
+  //         "</h5><h5 class='card-fields'>Created On : " +
+  //         retrievedBudgetData.BudgetTimestamp +
+  //         "</h5><div class='budget-card-buttons-div'><button class='expense-card-buttons' id=" +
+  //         retrievedBudgetKey +
+  //         " onClick='deleteBudget(this.id)'><i class='far fa-trash-alt'></i></button><button class='budget-card-buttons' id=" +
+  //         retrievedBudgetKey +
+  //         " onClick='clearExpensesSection();viewExpense(this.id,\""+retrievedBudgetData.BudgetName+"\","+retrievedBudgetData.BudgetValue+")'><i class='fas fa-eye'></i></button><button id=" +
+  //         retrievedBudgetKey +
+  //         " class='add-expense budget-card-buttons' onclick='clearExpensesSection();expenseBoxToggle();storeExpense(this.id)'><i class='fas fa-plus-circle'></i></button></div></div>"
+  //     );
 
-   });
+  //  });
   } else {
     console.log("Firebase User is not logged in");
   }
