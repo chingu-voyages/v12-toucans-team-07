@@ -1,0 +1,265 @@
+:root{
+    --text-color : #fff;
+    --background-color : #000;
+    --default-font-family: 'Cinzel', serif;
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--default-font-family);
+    background: var(--background-color);
+}
+ /* ----------------------------------------- */
+  /* ----------------------------------------- */
+main{
+    /* background: var(--background-color); */
+    color: var(--text-color);
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+   }
+ /* ----------------------------------------- */
+   header{
+       padding: 20px;
+       width: 100%;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-between;
+       align-items: center;
+   }
+
+   img{
+       width: 50px;
+       height: 50px;
+       border-radius: 50%;
+
+   }
+
+   h1{
+    font-size: 1.5em;
+   }
+
+  .logout-btn{
+       background: transparent;
+       color: var(--text-color);
+       border: none;
+       font-size: 1.5em;
+   }
+
+   .fa-sign-out-alt{
+       color: #fff;
+       
+   }
+ /* ----------------------------------------- */
+   section{
+    padding: 1px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+   .budgets-display-section{
+    background: rgba(255,255,255,0.95);
+    color: #000;
+    border-radius: 10px;
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+   }
+
+   .budget-details{
+    width: 90%;
+    border-radius: 10px;
+   }
+
+   .card-fields{
+       background: transparent;
+      
+   }
+   .budget-card, .expense-card{
+    background: rgba(0,0,0,0.9);
+    color: #fff;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    height: auto;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.budget-card-buttons-div, .expense-card-buttons-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+
+.budget-card-buttons, .expense-card-buttons{
+    background: transparent;
+    color: #fff;
+    font-size: 1.5em;
+    border: none;
+}
+   .expenses-display-section{
+    background: rgba(255,255,255,0.95);
+    color: #000;
+    border-radius: 10px;
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+   }
+  /* ----------------------------------------- */
+   footer{
+       text-align: center;
+       width: 100%;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-around;
+       align-items: center;
+   }
+
+   footer > a{
+       text-decoration: none;
+       color: var(--text-color);
+   }
+
+   /* ----------------------------------------- */
+
+   .add-budget{
+       background: transparent;
+       border: none;
+       bottom: 50px;
+       right: 50px;
+       position: absolute;
+    }
+
+   .add-budget > .fa-plus-circle{
+    background: transparent;
+       color: #999;
+       font-size: 3em;
+       
+   }
+
+   
+   .info-budget{
+    background: transparent;
+    border: none;
+    bottom: 120px;
+    right: 50px;
+    position: absolute;
+   }
+
+   .info-budget > .fa-info-circle{
+    background: transparent;
+    color: #999;
+    font-size: 3em;
+}
+
+/* ----------------------------------------- */
+
+.info-box{
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height:auto;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+     align-items: center;
+    visibility: hidden;
+}
+
+.info-box > h2, .info-box > p{
+    background: transparent;
+    width: 100%;
+    margin: 20px;
+}
+
+
+.info-box > button{
+    margin-top: 20px;
+    background: transparent;
+    border: none;
+    align-self: flex-end;
+}
+
+
+hr{
+    width: 100%;
+}
+/* --------------------------------------------- */
+
+.add-budget-box, .add-expense-box{
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height:auto;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    visibility: hidden;
+}
+
+.add-budget-box h2, div{
+    background: transparent;
+    width: 100%;
+    margin: 20px;
+}
+
+.add-expense-box h2, div{
+    background: transparent;
+    width: 100%;
+    margin: 20px;
+}
+
+.budget-fields, .expense-fields {
+    background: transparent;
+    width: 100%;
+    font-size: 1em;
+}
+
+#budget-submit, #expense-submit{
+    border: none;
+    font-size: 1.2em;
+}
+
+.close-budget, .close-expense{
+    margin-top: 20px;
+    background: transparent;
+    border: none;
+    align-self: flex-end;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Budget Manager</title>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-database.js"></script>
+    <script src="jquery-3.2.1.min.js"></script> 
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://kit.fontawesome.com/16b76cc9d0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <main>
+        <header>
+            <img class="user-image" src="" alt="user-display-picture">
+            <h1 class="user-name"></h1>
+            <button class="logout-btn" onclick="signout()">sign-out <i class="fas fa-sign-out-alt"></i></button>
+        </header>
+        <section>
+            <div class="budgets-display-section">
+                This Section displays all your Budgets.
+            </div>
+            <div class="expenses-display-section">
+           Click on 'eye' icon under a budget to view its expenses.
+            </div>
+        </section>
+        <footer>
+            <a href="https://kaushikdev.github.io/portfolio" target="_blank">Developer Portfolio</a>
+            <p>2019 &copy; Piyush Kaushik. All rights reserved.</p>
+        </footer>
+    </main>
+    <!-- Always Display Buttons -->
+    <button class="info-budget" onclick="informationBoxToggle()"><i class="fas fa-info-circle"></i></button>
+    
+    <button class="add-budget" onclick="budgetBoxToggle()"><i class="fas fa-plus-circle"></i></button>
+    <!-- Info Box HTML -->
+    <div class="info-box">
+        <h2>How To Use Budget Manager</h2>
+        <hr>
+        <p>Step1 : Click on + icon at bottom right of the application. "Enter your budget details" box opens.<br><br>Step2: Fill in budget details and save your budget. Your saved budget is now displayed under "This Section displays all your budgets" section. Under the displayed budget card, you will see different information like 'Budget Name', 'Budget Value' and some icons. <br><br>Step3: To add an expense, click on + icon inside budget card. Add details and save. <br><br>Step4: To View all expenses click on 'eye' shaped icon. All the expenses under a budget, will be displayed in "Click on 'eye' icon under a budget to view its expenses." section. Expenses section shows the current budget status in color, total expenses and current balance. </p>
+        <button class="close-info" onclick="closeInformationBox()">Close X</button>
+    </div>
+    <!-- Add Budget Input Box -->
+    <div class="add-budget-box">
+        <h2>Enter New Budget Details</h2>
+        <hr>
+        <div>
+         
+            <input class="budget-fields" id="budget-name" type="text" required maxlength="20" placeholder="Name Your Budget">
+        </div>
+        <div>
+            
+            <input class="budget-fields" id="budget-value" type="number" required min="100" max="1000000" maxlength="10" placeholder="Budget Value">
+        </div>
+        <button class="budget-fields" type="submit" id="budget-submit" onclick="saveBudgetDetails()">Save</button>
+        <button class="close-budget" onclick="closeBudgetBox()" id="budget-cancel">Cancel</button>
+    </div>
+       <!-- Add Expense Input Box -->
+       <div class="add-expense-box">
+        <h2>Enter New Expense Details</h2>
+        <hr>
+        <div>
+         
+            <input class="expense-fields" id="expense-name" type="text" required maxlength="20" placeholder="Name Your Expense">
+        </div>
+        <div>
+            
+            <input class="expense-fields" id="expense-value" type="number" required min="100" max="1000000" maxlength="10" placeholder="Expense Value">
+        </div>
+        <button class="expense-fields" type="submit" id="expense-submit" onclick="saveExpenseDetails()">Save</button>
+        <button class="close-expense" onclick="closeExpenseBox()" id="expense-cancel">Cancel</button>
+    </div>
+</body>
+<script src="main.js"></script>
+
+</html>
