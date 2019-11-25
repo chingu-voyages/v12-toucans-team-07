@@ -42,7 +42,7 @@ let provider = new firebase.auth.GoogleAuthProvider();
         window.location = "main.html";
     }
     else{
-        console.log("Firebase User is not logged in");
+       
     }
     
 });

@@ -118,7 +118,7 @@ function storeExpense(clickedID) {
 }
 
 function viewExpense(clickedID, budgetName, budgetValue) {
-  console.log("The clicked view expense button's id is : " + clickedID);
+  
   budgetID = clickedID;
   let totalExpenses = 0;
 
@@ -166,7 +166,7 @@ function viewExpense(clickedID, budgetName, budgetValue) {
 
 
 function deleteExpense(expenseID, budgetID, budgetName, budgetValue){
-  console.log("budgetID is : " + budgetID + " and ExpenseID is : " + expenseID);
+  
   expenseToBeDeletedRef = DATABASE_REF.child(
     "BudgetManager/users/" + uid + "/Budgets/" + budgetID + "/Expenses/" + expenseID  
   );
@@ -214,7 +214,7 @@ function saveExpenseDetails() {
 
 
 function deleteBudget(budgetID){
-  console.log("budgetID is : " + budgetID);
+ 
   budgetToBeDeletedRef = DATABASE_REF.child(
     "BudgetManager/users/" + uid + "/Budgets/" + budgetID  
   );
@@ -268,33 +268,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
 
 
     retrieveBudgets();
-    //Retrieving Budget Info
-  //   budgetRetrieveRef = DATABASE_REF.child(
-  //     "BudgetManager/users/" + uid + "/Budgets"
-  //   );
-  //   budgetRetrieveRef.on("child_added", snapshotBudget => {
-  //     retrievedBudgetData = snapshotBudget.val();
-  //     retrievedBudgetKey = snapshotBudget.key;
-
-      
-  //     $(".budgets-display-section").append(
-  //       "<div class='budget-card'><h3 class='card-fields'>" +
-  //         retrievedBudgetData.BudgetName +
-  //         "</h3><h5 class='card-fields'>Budget Value : <i class='fas fa-rupee-sign card-fields'></i> " +
-  //         retrievedBudgetData.BudgetValue +
-  //         "</h5><h5 class='card-fields'>Created On : " +
-  //         retrievedBudgetData.BudgetTimestamp +
-  //         "</h5><div class='budget-card-buttons-div'><button class='expense-card-buttons' id=" +
-  //         retrievedBudgetKey +
-  //         " onClick='deleteBudget(this.id)'><i class='far fa-trash-alt'></i></button><button class='budget-card-buttons' id=" +
-  //         retrievedBudgetKey +
-  //         " onClick='clearExpensesSection();viewExpense(this.id,\""+retrievedBudgetData.BudgetName+"\","+retrievedBudgetData.BudgetValue+")'><i class='fas fa-eye'></i></button><button id=" +
-  //         retrievedBudgetKey +
-  //         " class='add-expense budget-card-buttons' onclick='clearExpensesSection();expenseBoxToggle();storeExpense(this.id)'><i class='fas fa-plus-circle'></i></button></div></div>"
-  //     );
-
-  //  });
   } else {
-    console.log("Firebase User is not logged in");
+    
   }
 });
